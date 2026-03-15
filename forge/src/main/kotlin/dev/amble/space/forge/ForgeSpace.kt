@@ -1,6 +1,5 @@
 package dev.amble.space.forge
 
-import com.google.common.base.Suppliers
 import dev.amble.space.api.SpaceAPI
 import dev.amble.space.api.mod.SpaceStatistics
 import dev.amble.space.common.blocks.behavior.SpaceComposting
@@ -13,6 +12,8 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.state.properties.BlockSetType
 import net.neoforged.bus.api.IEventBus
+import net.neoforged.fml.ModContainer
+import net.neoforged.fml.common.Mod
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent
 import net.neoforged.neoforge.event.RegisterCommandsEvent
@@ -20,13 +21,11 @@ import net.neoforged.neoforge.registries.DeferredRegister
 import net.neoforged.neoforge.registries.RegisterEvent
 import java.util.function.BiConsumer
 
-object ForgeSpace {
+@Mod(SpaceAPI.MOD_ID)
+class ForgeSpace(modBus: IEventBus, container: ModContainer) {
     val ITEMS: DeferredRegister<Item> = DeferredRegister.create(BuiltInRegistries.ITEM, SpaceAPI.MOD_ID)
-    private var initialized = false
 
-    fun init(modBus: IEventBus) {
-        if (initialized) return
-        initialized = true
+    init {
 
         modBus.addListener(this::onRegister)
         modBus.addListener(this::onBuildCreativeModeTabContents)
