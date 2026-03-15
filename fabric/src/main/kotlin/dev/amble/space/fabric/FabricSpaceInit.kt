@@ -39,7 +39,7 @@ class FabricSpaceInit : ModInitializer {
         SpaceBlockSetTypes.registerBlocks(BlockSetType::register)
         SpaceCreativeTabs.registerCreativeTabs(bind(BuiltInRegistries.CREATIVE_MODE_TAB))
         SpaceSounds.registerSounds(bind(BuiltInRegistries.SOUND_EVENT))
-        SpaceBlocks.registerBlocks(bind(BuiltInRegistries.BLOCK))
+        SpaceBlocks.forEach(bind(BuiltInRegistries.BLOCK))
         SpaceBlocks.registerBlockItems(bind(BuiltInRegistries.ITEM))
         SpaceBlockEntities.registerTiles(bind(BuiltInRegistries.BLOCK_ENTITY_TYPE))
         SpaceItems.registerItems(bind(BuiltInRegistries.ITEM))

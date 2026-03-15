@@ -1,0 +1,15 @@
+{
+  "name": "space:mars_rover",
+  "fallback": "space:mars_rover",
+  "elements": [
+    {
+      "weight": 100,
+      "element": {
+        "location": "space:mars_rover",
+        "processors": "minecraft:mossify_10_percent",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

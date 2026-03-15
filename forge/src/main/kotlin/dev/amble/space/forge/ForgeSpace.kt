@@ -41,7 +41,7 @@ class ForgeSpace(modBus: IEventBus, container: ModContainer) {
     private fun onRegister(event: RegisterEvent) {
         register(event, BuiltInRegistries.CREATIVE_MODE_TAB, SpaceCreativeTabs::registerCreativeTabs)
         register(event, BuiltInRegistries.SOUND_EVENT, SpaceSounds::registerSounds)
-        register(event, BuiltInRegistries.BLOCK, SpaceBlocks::registerBlocks)
+        register(event, BuiltInRegistries.BLOCK, SpaceBlocks::forEach)
         register(event, BuiltInRegistries.ITEM, SpaceBlocks::registerBlockItems)
         register(event, BuiltInRegistries.ITEM, SpaceItems::registerItems)
         register(event, BuiltInRegistries.BLOCK_ENTITY_TYPE, SpaceBlockEntities::registerTiles)

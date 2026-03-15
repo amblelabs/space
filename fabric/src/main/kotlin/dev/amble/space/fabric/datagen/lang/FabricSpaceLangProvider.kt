@@ -2,6 +2,7 @@ package dev.amble.space.fabric.datagen.lang
 
 import dev.amble.lib.fabric.datagen.FabricAmbleLangProvider
 import dev.amble.space.api.SpaceAPI
+import dev.amble.space.common.lib.SpaceBlocks
 import dev.amble.space.common.lib.SpaceItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.minecraft.core.HolderLookup
@@ -22,6 +23,12 @@ class FabricSpaceLangProvider {
             SpaceItems.forEachItemId(itemIds::add)
             itemIds.sortedBy { it.path }.forEach { id ->
                 builder.add("item.${id.namespace}.${id.path}", id.path.toEnglishDisplayName())
+            }
+
+            SpaceBlocks.forEach { _, id ->
+                run {
+                    builder.add("block.${id.namespace}.${id.path}", id.path.toEnglishDisplayName())
+                }
             }
 
             builder.add("key.categories.space", "Space")

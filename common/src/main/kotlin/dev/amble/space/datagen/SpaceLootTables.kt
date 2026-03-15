@@ -12,7 +12,7 @@ class SpaceLootTables : AmbleLootTableSubProvider(SpaceAPI.MOD_ID) {
         blockTables: MutableMap<Block, LootTable.Builder>,
         lootTables: MutableMap<ResourceKey<LootTable>, LootTable.Builder>
     ) {
-        // register loot tables here
+        
     }
 }
 

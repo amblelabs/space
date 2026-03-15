@@ -1,0 +1,11 @@
+{
+  "type": "space:mars_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "space:mars",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "space:mars_biome"
+    }
+  }
+}
