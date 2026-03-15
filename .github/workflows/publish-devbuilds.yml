@@ -57,7 +57,7 @@ jobs:
 #        key: ${{ steps.cache-restore.outputs.cache-primary-key }}
     
     - name: Build
-      run: ./gradlew --configuration-cache :build
+      run: ./gradlew build
 
     #- name: Setup Amble Maven
     #  id: setup-maven
