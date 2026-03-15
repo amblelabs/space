@@ -14,6 +14,7 @@ import net.minecraft.network.protocol.common.ClientCommonPacketListener
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -36,6 +37,7 @@ import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 import net.neoforged.neoforge.network.PacketDistributor
+import net.neoforged.neoforge.server.ServerLifecycleHooks
 import java.util.function.BiFunction
 
 class ForgeXplatImpl : IXplatAbstractions {
@@ -46,6 +48,8 @@ class ForgeXplatImpl : IXplatAbstractions {
     override fun initPlatformSpecific() {
         // add optional mod interop here
     }
+
+    override fun server(): MinecraftServer? = ServerLifecycleHooks.getCurrentServer()
 
     override fun sendPacketToPlayer(target: ServerPlayer, packet: CustomPacketPayload) =
         PacketDistributor.sendToPlayer(target, packet)

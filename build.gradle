@@ -54,6 +54,8 @@ subprojects {
         }
 
         api("org.jspecify:jspecify:1.0.0")
+
+	    compileOnly "net.fabricmc:sponge-mixin:0.15.2+mixin.0.8.7"
     }
 
     java {

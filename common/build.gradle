@@ -15,3 +15,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     modImplementation "software.bernie.geckolib:geckolib-common-$minecraft_version:$geckolib_version"
 }
+
+sourceSets {
+	main {
+		resources {
+			srcDirs += [
+					'src/main/generated'
+			]
+		}
+	}
+}

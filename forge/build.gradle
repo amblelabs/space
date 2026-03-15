@@ -46,12 +46,6 @@ sourcesJar {
     from project(":common").sourceSets.main.allSource
 }
 
-sourceSets {
-    main.resources.srcDirs += [
-            'src/generated/resources',
-    ]
-}
-
 processResources {
     from project(":common").sourceSets.main.resources
     exclude '.cache/**'

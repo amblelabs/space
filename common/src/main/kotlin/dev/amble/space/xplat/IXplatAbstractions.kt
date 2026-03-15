@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.common.ClientCommonPacketListener
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -29,6 +30,7 @@ interface IXplatAbstractions {
     fun isUnstable(): Boolean
     fun isPhysicalClient(): Boolean
     fun initPlatformSpecific()
+    fun server(): MinecraftServer?
 
     fun sendPacketToPlayer(target: ServerPlayer, packet: CustomPacketPayload)
     fun sendPacketNear(pos: Vec3, radius: Double, dimension: ServerLevel, packet: CustomPacketPayload)

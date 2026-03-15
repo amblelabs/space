@@ -5,6 +5,7 @@ import net.minecraft.client.model.HumanoidModel
 import net.minecraft.core.Holder
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.ItemStack
@@ -52,6 +53,19 @@ class SpaceSuitItem(
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache = cache
+
+    fun Player.hasFullSpaceSuit(): Boolean = checkFullSpaceSuit(this)
+
+    companion object {
+        @JvmStatic
+        fun checkFullSpaceSuit(player: Player): Boolean {
+            val inv = player.inventory
+            return inv.getArmor(0).item is SpaceSuitItem &&
+                    inv.getArmor(1).item is SpaceSuitItem &&
+                    inv.getArmor(2).item is SpaceSuitItem &&
+                    inv.getArmor(3).item is SpaceSuitItem
+        }
+    }
 }
 
 

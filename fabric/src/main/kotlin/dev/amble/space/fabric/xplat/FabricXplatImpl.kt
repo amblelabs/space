@@ -7,6 +7,7 @@ import dev.amble.space.xplat.IXplatAbstractions
 import dev.amble.space.xplat.IXplatTags
 import dev.amble.space.xplat.Platform
 import net.fabricmc.api.EnvType
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -22,6 +23,7 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.common.ClientCommonPacketListener
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -41,6 +43,7 @@ import java.util.function.BiFunction
 import java.util.Optional
 
 class FabricXplatImpl : IXplatAbstractions {
+    private var server: MinecraftServer? = null
 
     override fun platform() = Platform.FABRIC
     override fun isPhysicalClient() = FabricLoader.getInstance().environmentType == EnvType.CLIENT
@@ -48,7 +51,12 @@ class FabricXplatImpl : IXplatAbstractions {
 
     override fun initPlatformSpecific() {
         // add optional mod interop here
+
+        ServerLifecycleEvents.SERVER_STARTING.register { server1 -> server = server1 }
+        ServerLifecycleEvents.SERVER_STOPPED.register { _ -> server = null }
     }
+
+    override fun server(): MinecraftServer? = server
 
     override fun sendPacketToPlayer(target: ServerPlayer, packet: CustomPacketPayload) =
         ServerPlayNetworking.send(target, packet)

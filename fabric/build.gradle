@@ -65,16 +65,10 @@ sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from project(":common").sourceSets.main.allSource
 }
-
-sourceSets {
-    main.resources.srcDirs += [
-            'src/main/generated',
-    ]
-}
-
 processResources {
     from project(":common").sourceSets.main.resources
     exclude '.cache/**'
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
