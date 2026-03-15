@@ -59,23 +59,23 @@ jobs:
     - name: Build
       run: ./gradlew --configuration-cache :build
 
-    - name: Setup Amble Maven
-      id: setup-maven
-      uses: drtheodor/static-file-server-actions/upload/setup@main
-      with:
-        repo: amblelabs/maven
+    #- name: Setup Amble Maven
+    #  id: setup-maven
+    #  uses: drtheodor/static-file-server-actions/upload/setup@main
+    #  with:
+    #    repo: amblelabs/maven
 
-    - name: Build for Maven
-      env:
-        CI_MAVEN_PATH: ${{ steps.setup-maven.outputs.path }}
-      run: ./gradlew --configuration-cache :publishMavenJavaPublicationToCiRepository
+    #- name: Build for Maven
+    #  env:
+    #    CI_MAVEN_PATH: ${{ steps.setup-maven.outputs.path }}
+    #  run: ./gradlew --configuration-cache :publishMavenJavaPublicationToCiRepository
 
-    - name: Publish to Amble Maven
-      uses: drtheodor/static-file-server-actions/upload@main
-      with:
-        published: dev/amble/space
-        token: ${{ secrets.BOT_TOKEN }}
-        message: "chore: publish space artifacts"
+    #- name: Publish to Amble Maven
+    #  uses: drtheodor/static-file-server-actions/upload@main
+    #  with:
+    #    published: dev/amble/space
+    #    token: ${{ secrets.BOT_TOKEN }}
+    #    message: "chore: publish space artifacts"
 
     - name: Publish artifacts
       uses: drtheodor/discord-webhook-upload-action@v0.2
