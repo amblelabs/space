@@ -43,6 +43,7 @@ class ForgeSpace(modBus: IEventBus, container: ModContainer) {
         register(event, BuiltInRegistries.SOUND_EVENT, SpaceSounds::registerSounds)
         register(event, BuiltInRegistries.BLOCK, SpaceBlocks::registerBlocks)
         register(event, BuiltInRegistries.ITEM, SpaceBlocks::registerBlockItems)
+        register(event, BuiltInRegistries.ITEM, SpaceItems::registerItems)
         register(event, BuiltInRegistries.BLOCK_ENTITY_TYPE, SpaceBlockEntities::registerTiles)
         register(event, BuiltInRegistries.ENTITY_TYPE, SpaceEntities::registerEntities)
         register(event, BuiltInRegistries.ATTRIBUTE, SpaceAttributes::register)
