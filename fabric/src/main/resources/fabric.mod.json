@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "space",
+  "version": "${version}",
+  "name": "Space",
+  "description": "Space for 1.21.1 Fabric and Forge!",
+  "authors": [
+    "AmbleLabs"
+  ],
+  "contributors": [
+  ],
+  "contact": {
+    "homepage": "https://amblelabs.dev/",
+    "wiki": "https://amblelabs.dev/space-wiki/"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/space/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.amble.space.fabric.FabricSpaceInit"
+    ],
+    "client": [
+      "dev.amble.space.fabric.FabricSpaceClientInit"
+    ],
+    "fabric-datagen": [
+      "dev.amble.space.fabric.datagen.FabricSpaceDataGenerators"
+    ],
+    "modmenu": [
+      "dev.amble.space.fabric.interop.ModMenuInterop"
+    ]
+  },
+  "mixins": [
+    "space.mixins.json",
+    "space-fabric.mixins.json"
+  ],
+  "accessWidener": "space-fabric.accesswidener",
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.13.0+kotlin.2.1.0",
+    "cloth-config": "15.0.*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
