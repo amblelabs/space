@@ -55,7 +55,11 @@ class FabricSpaceInit : ModInitializer {
     }
 
     private fun <T> bind(registry: Registry<T>): BiConsumer<T, ResourceLocation> =
-        BiConsumer { t, id -> Registry.register(registry, id, t) }
+        BiConsumer { t, id ->
+            if (t != null) {
+                Registry.register(registry, id, t)
+            }
+        }
 }
 
 

@@ -46,6 +46,7 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
     modImplementation("com.terraformersmc:modmenu:$modmenu_version")
+    modImplementation "software.bernie.geckolib:geckolib-fabric-$minecraft_version:$geckolib_version"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
@@ -69,11 +70,11 @@ sourceSets {
     main.resources.srcDirs += [
             'src/main/generated',
     ]
-    main.kotlin.srcDirs += ["$rootDir/common/src/main/kotlin"]
 }
 
 processResources {
     from project(":common").sourceSets.main.resources
+    exclude '.cache/**'
 
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version

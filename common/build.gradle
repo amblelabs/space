@@ -6,10 +6,12 @@ loom {
     accessWidenerPath = file("../fabric/src/main/resources/space-fabric.accesswidener")
 }
 
+
 repositories {
     maven { url 'https://maven.blamejared.com' }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    modImplementation "software.bernie.geckolib:geckolib-common-$minecraft_version:$geckolib_version"
 }

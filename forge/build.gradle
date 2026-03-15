@@ -20,9 +20,8 @@ repositories {
 
 dependencies {
     neoForge "net.neoforged:neoforge:$rootProject.forge_version"
-    implementation("thedarkcolour:kotlinforforge-neoforge:$kotlin_for_forge_version") {
-        transitive = false
-    }
+	implementation("thedarkcolour:kotlinforforge-neoforge:$kotlin_for_forge_version")
+	modImplementation "software.bernie.geckolib:geckolib-neoforge-$minecraft_version:$geckolib_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
     common(project(path: ':common', configuration: 'transformProductionNeoForge')) { transitive false }
@@ -36,6 +35,12 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
     source(project(":common").sourceSets.main.kotlin)
 }
 
+tasks.named("compileKotlin", org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configure {
+    // NeoForge dev launch coordinates currently include build/classes/java/main only.
+    // Emit Kotlin main classes there so they are visible to the mod classloader.
+    destinationDirectory.set(layout.buildDirectory.dir("classes/java/main"))
+}
+
 sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from project(":common").sourceSets.main.allSource
@@ -45,11 +50,11 @@ sourceSets {
     main.resources.srcDirs += [
             'src/generated/resources',
     ]
-    main.kotlin.srcDirs += ["$rootDir/common/src/main/kotlin"]
 }
 
 processResources {
     from project(":common").sourceSets.main.resources
+    exclude '.cache/**'
     inputs.property 'version', project.version
 
     filesMatching('META-INF/neoforge.mods.toml') {
