@@ -78,7 +78,7 @@ jobs:
     #    message: "chore: publish space artifacts"
 
     - name: Publish artifacts
-      uses: drtheodor/discord-webhook-upload-action@v0.2
+      uses: drtheodor/discord-webhook-upload-action@v0.3
       with:
         url: ${{ secrets.DEV_BUILDS }}
         username: bill kerman
