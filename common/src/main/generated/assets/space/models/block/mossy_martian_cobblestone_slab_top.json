@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "space:block/mossy_martian_cobblestone",
+    "side": "space:block/mossy_martian_cobblestone",
+    "top": "space:block/mossy_martian_cobblestone"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "space:block/moon_sandstone_pillar",
+    "top": "space:block/moon_sandstone_pillar_top"
+  }
+}

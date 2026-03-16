@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "space:block/mossy_martian_cobblestone",
+    "side": "space:block/mossy_martian_cobblestone"
+  }
+}

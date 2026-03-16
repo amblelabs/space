@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "space:block/anorthosite_slab_bottom"
+    },
+    "type=double": {
+      "model": "space:block/anorthosite_slab_double"
+    },
+    "type=top": {
+      "model": "space:block/anorthosite_slab_top"
+    }
+  }
+}

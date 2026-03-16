@@ -1,0 +1,37 @@
+{
+  "arcadia": {
+    "sounds": [
+      "space:arcadia"
+    ]
+  },
+  "dreamy_flashback": {
+    "sounds": [
+      "space:dreamy_flashback"
+    ]
+  },
+  "frost_waltz": {
+    "sounds": [
+      "space:frost_waltz"
+    ]
+  },
+  "frozen_star": {
+    "sounds": [
+      "space:frozen_star"
+    ]
+  },
+  "impact_lento": {
+    "sounds": [
+      "space:impact_lento"
+    ]
+  },
+  "space_ambience": {
+    "sounds": [
+      "space:space_ambience"
+    ]
+  },
+  "wizardtorium": {
+    "sounds": [
+      "space:wizardtorium"
+    ]
+  }
+}
