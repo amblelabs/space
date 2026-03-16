@@ -3,7 +3,7 @@
 <div align="center">
 
 ### **Presented by [Amble Labs](https://amblelabs.github.io)**
-<img src="https://cdn.modrinth.com/data/cached_images/3a42ec9af204d77515b938dc326a6694bf8766b7.png" alt="space Logo" width="700"/>
+<img src="https://raw.githubusercontent.com/amblelabs/space/refs/heads/main/minecraft_title.png" alt="space Logo" width="700"/>
 
 &nbsp;
 
