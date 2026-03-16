@@ -8,11 +8,6 @@ object SpaceInterop {
         // platform-independent interop init
     }
 
-    @JvmStatic
-    fun clientInit() {
-        // client-side interop init
-    }
-
     object Fabric {
         const val TRINKETS_API_ID = "trinkets"
     }

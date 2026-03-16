@@ -25,6 +25,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
     common(project(path: ':common', configuration: 'transformProductionNeoForge')) { transitive false }
+	developmentForge(project(path: ':common', configuration: 'transformProductionNeoForge')) { transitive false }
 }
 
 tasks.withType(JavaCompile).configureEach {

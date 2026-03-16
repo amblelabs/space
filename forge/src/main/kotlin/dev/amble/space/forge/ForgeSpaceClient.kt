@@ -6,12 +6,14 @@ import dev.amble.space.client.model.SpaceModelLayers
 import dev.amble.space.common.lib.SpaceParticles
 import dev.amble.space.forge.client.RegisterClientStuff
 import dev.amble.space.forge.xplat.ForgeClientXplatImpl
+import dev.amble.space.interop.ClientSpaceInterop
 import dev.amble.space.interop.SpaceInterop
 import dev.amble.space.xplat.IClientXplatAbstractions
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
+import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent
@@ -25,7 +27,7 @@ object ForgeSpaceClient {
         RegisterClientStuff.init()
         IClientXplatAbstractions.INSTANCE.initPlatformSpecific()
         ForgeClientXplatImpl.flushClientSetupWork(event)
-        SpaceInterop.clientInit()
+        ClientSpaceInterop.init()
     }
 
     @SubscribeEvent
@@ -66,6 +68,11 @@ object ForgeSpaceClient {
             { color, item -> event.register(color, item) },
             { color, block -> event.blockColors.register(color, block) }
         )
+    }
+
+    @SubscribeEvent
+    fun onClientTick(event: ClientTickEvent.Post) {
+        ClientSpaceInterop.tick()
     }
 }
 

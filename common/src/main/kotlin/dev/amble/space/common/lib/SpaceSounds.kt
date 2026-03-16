@@ -3,7 +3,10 @@ package dev.amble.space.common.lib
 import dev.amble.space.api.SpaceAPI.modLoc
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.level.block.Block
 import java.util.function.BiConsumer
+import kotlin.collections.component1
+import kotlin.collections.component2
 
 object SpaceSounds {
     private val SOUNDS = linkedMapOf<ResourceLocation, SoundEvent>()
@@ -19,5 +22,12 @@ object SpaceSounds {
         check(old == null) { "Typo? Duplicate id $name" }
         return sound
     }
+
+    @JvmStatic
+    fun forEach(r: BiConsumer<ResourceLocation, SoundEvent>) =
+        SOUNDS.forEach { (k, v) -> r.accept(k, v) }
+
+    @JvmStatic
+    val SPACE_AMBIENCE : SoundEvent = sound("space_ambience")
 }
 

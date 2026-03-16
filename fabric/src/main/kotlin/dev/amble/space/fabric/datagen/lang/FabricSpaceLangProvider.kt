@@ -4,6 +4,7 @@ import dev.amble.lib.fabric.datagen.FabricAmbleLangProvider
 import dev.amble.space.api.SpaceAPI
 import dev.amble.space.common.lib.SpaceBlocks
 import dev.amble.space.common.lib.SpaceItems
+import dev.amble.space.common.lib.SpaceSounds
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceLocation
@@ -28,6 +29,14 @@ class FabricSpaceLangProvider {
             SpaceBlocks.forEach { _, id ->
                 run {
                     builder.add("block.${id.namespace}.${id.path}", id.path.toEnglishDisplayName())
+                }
+            }
+
+            SpaceSounds.forEach { id, _ ->
+                run {
+                    run {
+                        builder.add("sound.${id.namespace}.${id.path}", id.path.toEnglishDisplayName())
+                    }
                 }
             }
 

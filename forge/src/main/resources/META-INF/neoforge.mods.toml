@@ -3,6 +3,9 @@ loaderVersion = "[5.10,)"
 #issueTrackerURL = ""
 license = "GNU LGPL 3.0"
 
+[[accessTransformers]]
+file = "META-INF/accesstransformer.cfg"
+
 [[mods]]
 modId = "space"
 version = "${version}"

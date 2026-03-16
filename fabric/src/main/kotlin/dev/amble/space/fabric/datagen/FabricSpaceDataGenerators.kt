@@ -1,5 +1,6 @@
 package dev.amble.space.fabric.datagen
 
+import dev.amble.space.api.SpaceAPI
 import dev.amble.space.datagen.IXplatIngredients
 import dev.amble.space.datagen.SpaceAdvancements
 import dev.amble.space.datagen.SpaceLootTables
@@ -45,6 +46,7 @@ class FabricSpaceDataGenerators : DataGeneratorEntrypoint {
         pack.addProvider { output, lookup -> AdvancementProvider(output, lookup, listOf(SpaceAdvancements())) }
         pack.addProvider { output, _ -> FabricSpaceModelProvider(output) }
         pack.addProvider(FabricSpaceLangProvider::EnUs)
+        pack.addProvider { output, _ -> FabricSoundProvider(output, SpaceAPI.MOD_ID)}
     }
 
     private class BlockTagWrapper {
