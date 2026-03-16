@@ -33,6 +33,7 @@ repositories {
 
     // modmenu
     maven { url = "https://maven.terraformersmc.com/releases/" }
+	maven { url "https://maven.createmod.net" }
 }
 
 dependencies {
@@ -50,6 +51,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
+	modCompileOnly "dev.engine-room.flywheel:flywheel-fabric-api-1.21.1:1.0.6"
+	modLocalRuntime "dev.engine-room.flywheel:flywheel-fabric-1.21.1:1.0.6"
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
 }
 

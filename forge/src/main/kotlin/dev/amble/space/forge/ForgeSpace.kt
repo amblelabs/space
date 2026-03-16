@@ -5,7 +5,9 @@ import dev.amble.space.api.mod.SpaceStatistics
 import dev.amble.space.common.blocks.behavior.SpaceComposting
 import dev.amble.space.common.blocks.behavior.SpaceStrippable
 import dev.amble.space.common.lib.*
+import dev.amble.space.forge.network.ForgeNetworking
 import dev.amble.space.interop.SpaceInterop
+import dev.amble.space.network.SpaceNetworking
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
@@ -36,6 +38,9 @@ class ForgeSpace(modBus: IEventBus, container: ModContainer) {
         SpaceStrippable.init()
         SpaceInterop.init()
         SpaceStatistics.register()
+
+        ForgeNetworking.register(modBus)
+        SpaceNetworking.registerPackets()
     }
 
     private fun onRegister(event: RegisterEvent) {

@@ -16,7 +16,7 @@ class FabricSpaceClientInit : ClientModInitializer {
     override fun onInitializeClient() {
         RegisterClientStuff.init()
 
-        KeyBindingHelper.registerKeyBinding(SpaceKeybinds.EXAMPLE_KEY)
+        SpaceKeybinds.all().forEach { KeyBindingHelper.registerKeyBinding(it) }
 
         SpaceModelLayers.init { loc, def -> EntityModelLayerRegistry.registerModelLayer(loc, def::get) }
 

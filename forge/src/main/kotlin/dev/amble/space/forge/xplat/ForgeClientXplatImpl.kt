@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
+import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.network.PacketDistributor
@@ -47,6 +48,7 @@ class ForgeClientXplatImpl : IClientXplatAbstractions {
         private val ENTITY_RENDERER_REGISTRATIONS = mutableListOf<(EntityRenderersEvent.RegisterRenderers) -> Unit>()
 
         @JvmStatic
+        @SubscribeEvent
         fun flushClientSetupWork(event: FMLClientSetupEvent) {
             val work = synchronized(CLIENT_SETUP_WORK) {
                 CLIENT_SETUP_WORK.toList().also { CLIENT_SETUP_WORK.clear() }
@@ -58,6 +60,7 @@ class ForgeClientXplatImpl : IClientXplatAbstractions {
         }
 
         @JvmStatic
+        @SubscribeEvent
         fun flushEntityRendererRegistrations(event: EntityRenderersEvent.RegisterRenderers) {
             val registrations = synchronized(ENTITY_RENDERER_REGISTRATIONS) {
                 ENTITY_RENDERER_REGISTRATIONS.toList().also { ENTITY_RENDERER_REGISTRATIONS.clear() }

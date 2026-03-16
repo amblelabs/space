@@ -1,6 +1,7 @@
 package dev.amble.space.common.lib
 
 import dev.amble.space.api.SpaceAPI.modLoc
+import dev.amble.space.common.blockentity.rocket.RocketFuelTankBlockEntity
 import dev.amble.space.xplat.IXplatAbstractions
 import net.minecraft.core.BlockPos
 import net.minecraft.resources.ResourceLocation
@@ -28,5 +29,12 @@ object SpaceBlockEntities {
         check(old == null) { "Duplicate id $id" }
         return ret
     }
+
+    @JvmStatic
+    val ROCKET_FUEL_TANK: BlockEntityType<RocketFuelTankBlockEntity> = register(
+        "rocket_fuel_tank",
+        BiFunction(::RocketFuelTankBlockEntity),
+        SpaceBlocks.ROCKET_FUEL_TANK
+    )
 }
 

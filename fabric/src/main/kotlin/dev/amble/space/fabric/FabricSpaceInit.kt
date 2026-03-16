@@ -4,7 +4,9 @@ import dev.amble.space.api.mod.SpaceStatistics
 import dev.amble.space.common.blocks.behavior.SpaceComposting
 import dev.amble.space.common.blocks.behavior.SpaceStrippable
 import dev.amble.space.common.lib.*
+import dev.amble.space.fabric.network.FabricNetworking
 import dev.amble.space.interop.SpaceInterop
+import dev.amble.space.network.SpaceNetworking
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
@@ -52,6 +54,9 @@ class FabricSpaceInit : ModInitializer {
         SpaceLootFunctions.registerSerializers(bind(BuiltInRegistries.LOOT_FUNCTION_TYPE))
         @Suppress("UnusedExpression") FlammableBlockRegistry.getDefaultInstance()
         SpaceStatistics.register()
+
+        SpaceNetworking.registerPackets()
+        FabricNetworking.register()
     }
 
     private fun <T> bind(registry: Registry<T>): BiConsumer<T, ResourceLocation> =

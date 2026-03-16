@@ -1,9 +1,11 @@
 package dev.amble.space.common.lib
 
 import dev.amble.space.api.SpaceAPI.modLoc
+import dev.amble.space.common.entity.RocketContraptionEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobCategory
 import java.util.function.BiConsumer
 
 object SpaceEntities {
@@ -19,5 +21,14 @@ object SpaceEntities {
         check(old == null) { "Typo? Duplicate id $id" }
         return type
     }
+
+    @JvmStatic
+    val ROCKET_CONTRAPTION : EntityType<RocketContraptionEntity> = register("rocket_contraption", EntityType.Builder.of(::RocketContraptionEntity,
+        MobCategory.MISC)
+        .sized(1f, 1f)  // tune to your rocket size
+        .clientTrackingRange(128)
+        .updateInterval(1)
+        .noSummon()
+        .build("rocket_contraption"))
 }
 

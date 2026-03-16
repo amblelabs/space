@@ -32,7 +32,7 @@ object ForgeSpaceClient {
 
     @SubscribeEvent
     fun onRegisterKeyMappings(event: RegisterKeyMappingsEvent) {
-        event.register(SpaceKeybinds.EXAMPLE_KEY)
+        SpaceKeybinds.all().forEach { event.register(it) }
     }
 
     @SubscribeEvent

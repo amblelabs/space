@@ -13,7 +13,7 @@ object PlanetConstants {
     val GRAVITY_MULTIPLIER : Float = 0.08F
 }
 
-data class Planet(val dimension : ResourceLocation, val gravity : Float = -1F, val oxygenRate : Float = 1F, val temperature : Float) {
+data class Planet(val dimension : ResourceLocation, val gravity : Float = -1F, val oxygenRate : Float = 1F, val atmosphereDensity : Float = 1F, val temperature : Float = 237.15F) {
     fun asWorldOrNull(
         function: (ResourceKey<Level>) -> Level? = { IXplatAbstractions.INSTANCE.server()?.getLevel(it) }
     ): Level? {
@@ -52,12 +52,14 @@ object PlanetRegistry {
         gravity = 3.72F
         oxygenRate = 0F
         temperature = 210F
+        atmosphereDensity = 0.06F
     }
 
     val MOON = planet("moon") {
         gravity = 1.62F
         oxygenRate = 0F
         temperature = 220F
+        atmosphereDensity = 0F
     }
 }
 
@@ -65,6 +67,7 @@ class PlanetBuilder(val id: ResourceLocation) {
     var gravity: Float = 9.81F
     var oxygenRate : Float = 1F
     var temperature: Float = 293.15F // 20 degs
+    var atmosphereDensity: Float = 1F
 
-    fun build() = Planet(id, gravity, oxygenRate, temperature)
+    fun build() = Planet(id, gravity, oxygenRate, atmosphereDensity, temperature)
 }

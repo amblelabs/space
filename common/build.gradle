@@ -9,11 +9,13 @@ loom {
 
 repositories {
     maven { url 'https://maven.blamejared.com' }
+	maven { url "https://maven.createmod.net" }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     modImplementation "software.bernie.geckolib:geckolib-common-$minecraft_version:$geckolib_version"
+	modCompileOnly "dev.engine-room.flywheel:flywheel-common-mojmap-api-1.21.1:1.0.6"
 }
 
 sourceSets {
