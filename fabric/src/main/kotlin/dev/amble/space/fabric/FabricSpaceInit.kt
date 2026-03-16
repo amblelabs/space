@@ -1,6 +1,7 @@
 package dev.amble.space.fabric
 
 import dev.amble.space.api.mod.SpaceStatistics
+import dev.amble.space.api.planet.SolarSystemSavedData
 import dev.amble.space.common.blocks.behavior.SpaceComposting
 import dev.amble.space.common.blocks.behavior.SpaceStrippable
 import dev.amble.space.common.lib.*
@@ -9,6 +10,8 @@ import dev.amble.space.interop.SpaceInterop
 import dev.amble.space.network.SpaceNetworking
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.minecraft.core.Registry
@@ -30,6 +33,12 @@ class FabricSpaceInit : ModInitializer {
 
     private fun initListeners() {
         CommandRegistrationCallback.EVENT.register { dp, _, _ -> SpaceCommands.register(dp) }
+        ServerTickEvents.END_SERVER_TICK.register { server ->
+            SolarSystemSavedData.get(server).tick(server)
+        }
+        ServerPlayConnectionEvents.JOIN.register { handler, _, server ->
+            SolarSystemSavedData.get(server).syncToPlayer(handler.player)
+        }
 
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register { tab, entries ->
             SpaceBlocks.registerBlockCreativeTab(entries::accept, tab)

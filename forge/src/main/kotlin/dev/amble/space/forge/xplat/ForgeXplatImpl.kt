@@ -60,6 +60,10 @@ class ForgeXplatImpl : IXplatAbstractions {
     override fun sendPacketTracking(entity: Entity, packet: CustomPacketPayload) =
         PacketDistributor.sendToPlayersTrackingEntity(entity, packet)
 
+    override fun sendToAll(packet: CustomPacketPayload) {
+        PacketDistributor.sendToAllPlayers(packet)
+    }
+
     override fun toVanilla(message: CustomPacketPayload): Packet<ClientCommonPacketListener> =
         ClientboundCustomPayloadPacket(message)
 

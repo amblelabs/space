@@ -67,6 +67,10 @@ class FabricXplatImpl : IXplatAbstractions {
     override fun sendPacketTracking(entity: Entity, packet: CustomPacketPayload) =
         sendPacketToPlayers(PlayerLookup.tracking(entity), packet)
 
+    override fun sendToAll(packet: CustomPacketPayload) {
+        server()?.let { sendPacketToPlayers(it.playerList.players, packet) }
+    }
+
     private fun sendPacketToPlayers(players: Collection<ServerPlayer>, packet: CustomPacketPayload) {
         val pkt = toVanilla(packet)
         players.forEach { it.connection.send(pkt) }

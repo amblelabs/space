@@ -2,6 +2,7 @@ package dev.amble.space.forge
 
 import dev.amble.space.api.SpaceAPI
 import dev.amble.space.api.mod.SpaceStatistics
+import dev.amble.space.api.planet.SolarSystemSavedData
 import dev.amble.space.common.blocks.behavior.SpaceComposting
 import dev.amble.space.common.blocks.behavior.SpaceStrippable
 import dev.amble.space.common.lib.*
@@ -19,6 +20,8 @@ import net.neoforged.fml.common.Mod
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent
 import net.neoforged.neoforge.event.RegisterCommandsEvent
+import net.neoforged.neoforge.event.entity.player.PlayerEvent
+import net.neoforged.neoforge.event.tick.ServerTickEvent
 import net.neoforged.neoforge.registries.DeferredRegister
 import net.neoforged.neoforge.registries.RegisterEvent
 import java.util.function.BiConsumer
@@ -32,6 +35,8 @@ class ForgeSpace(modBus: IEventBus, container: ModContainer) {
         modBus.addListener(this::onRegister)
         modBus.addListener(this::onBuildCreativeModeTabContents)
         NeoForge.EVENT_BUS.addListener(this::onRegisterCommands)
+        NeoForge.EVENT_BUS.addListener(this::onServerTick)
+        NeoForge.EVENT_BUS.addListener(this::onPlayerLoggedIn)
 
         SpaceBlockSetTypes.registerBlocks(BlockSetType::register)
         SpaceComposting.setup()
@@ -66,6 +71,17 @@ class ForgeSpace(modBus: IEventBus, container: ModContainer) {
 
     private fun onRegisterCommands(event: RegisterCommandsEvent) {
         SpaceCommands.register(event.dispatcher)
+    }
+
+    private fun onServerTick(event: ServerTickEvent.Post) {
+        SolarSystemSavedData.get(event.server).tick(event.server)
+    }
+
+    private fun onPlayerLoggedIn(event: PlayerEvent.PlayerLoggedInEvent) {
+        val player = event.entity
+        if (player is net.minecraft.server.level.ServerPlayer) {
+            SolarSystemSavedData.get(player.server).syncToPlayer(player)
+        }
     }
 
     private fun <T : Any> register(

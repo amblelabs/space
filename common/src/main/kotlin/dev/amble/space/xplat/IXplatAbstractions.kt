@@ -35,6 +35,7 @@ interface IXplatAbstractions {
     fun sendPacketToPlayer(target: ServerPlayer, packet: CustomPacketPayload)
     fun sendPacketNear(pos: Vec3, radius: Double, dimension: ServerLevel, packet: CustomPacketPayload)
     fun sendPacketTracking(entity: Entity, packet: CustomPacketPayload)
+    fun sendToAll(packet: CustomPacketPayload)
     fun toVanilla(message: CustomPacketPayload): Packet<ClientCommonPacketListener>
 
     fun <T : BlockEntity> createBlockEntityType(func: BiFunction<BlockPos, BlockState, T>, vararg blocks: Block): BlockEntityType<T>

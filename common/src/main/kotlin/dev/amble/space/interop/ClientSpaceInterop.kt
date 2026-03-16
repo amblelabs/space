@@ -4,10 +4,12 @@ import dev.amble.space.client.SpaceKeybinds
 import dev.amble.space.client.renderer.EmptyEntityRenderer
 import dev.amble.space.client.sound.SpaceSoundManager
 import dev.amble.space.client.sound.TrackedSpaceSounds
+import dev.amble.space.api.planet.client.ClientSolarSystem
 import dev.amble.space.common.contraption.render.RocketVisualization
 import dev.amble.space.common.lib.SpaceEntities
 import dev.amble.space.common.lib.SpaceSounds
 import dev.amble.space.xplat.IClientXplatAbstractions
+import net.minecraft.client.Minecraft
 
 object ClientSpaceInterop {
     @JvmStatic
@@ -20,6 +22,11 @@ object ClientSpaceInterop {
 
     @JvmStatic
     fun tick() {
+        if (Minecraft.getInstance().level == null) {
+            ClientSolarSystem.reset()
+            return
+        }
+        ClientSolarSystem.tick()
         SpaceSoundManager.tick()
         SpaceKeybinds.tick()
     }

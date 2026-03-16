@@ -4,6 +4,7 @@ import dev.amble.space.network.c2s.ThrottlePacket
 import dev.amble.space.network.c2s.RocketControlPacket
 import dev.amble.space.network.c2s.ForceDismountPacket
 import dev.amble.space.network.s2c.RocketBlocksSyncPacket
+import dev.amble.space.network.s2c.SolarSystemSyncPacket
 
 object SpaceNetworking {
     fun registerPackets() {
@@ -11,6 +12,12 @@ object SpaceNetworking {
             RocketBlocksSyncPacket.TYPE,
             RocketBlocksSyncPacket.STREAM_CODEC,
             RocketBlocksSyncPacket::handle
+        )
+
+        SpacePackets.registerS2C(
+            SolarSystemSyncPacket.TYPE,
+            SolarSystemSyncPacket.STREAM_CODEC,
+            SolarSystemSyncPacket::handle
         )
 
         SpacePackets.registerC2S(

@@ -8,7 +8,9 @@
   ],
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "client.FogRendererMixin",
+    "client.SkyboxMixin"
   ],
   "injectors": {
     "defaultRequire": 1
