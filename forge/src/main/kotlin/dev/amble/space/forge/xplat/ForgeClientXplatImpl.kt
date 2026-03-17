@@ -31,9 +31,7 @@ class ForgeClientXplatImpl : IClientXplatAbstractions {
     }
 
     override fun <T : Entity> registerEntityRenderer(type: EntityType<out T>, renderer: EntityRendererProvider<T>) {
-        synchronized(ENTITY_RENDERER_REGISTRATIONS) {
-            ENTITY_RENDERER_REGISTRATIONS += { event -> event.registerEntityRenderer(type, renderer) }
-        }
+        queueEntityRenderer(type, renderer)
     }
 
     @Suppress("DEPRECATION")
@@ -45,7 +43,16 @@ class ForgeClientXplatImpl : IClientXplatAbstractions {
 
     companion object {
         private val CLIENT_SETUP_WORK = mutableListOf<() -> Unit>()
-        private val ENTITY_RENDERER_REGISTRATIONS = mutableListOf<(EntityRenderersEvent.RegisterRenderers) -> Unit>()
+        private data class RendererEntry<T : Entity>(
+            val type: EntityType<out T>,
+            val renderer: EntityRendererProvider<T>
+        )
+
+        private val pendingEntityRenderers = mutableListOf<RendererEntry<*>>()
+
+        fun <T : Entity> queueEntityRenderer(type: EntityType<out T>, provider: EntityRendererProvider<T>) {
+            pendingEntityRenderers.add(RendererEntry(type, provider))
+        }
 
         @JvmStatic
         @SubscribeEvent
@@ -62,11 +69,11 @@ class ForgeClientXplatImpl : IClientXplatAbstractions {
         @JvmStatic
         @SubscribeEvent
         fun flushEntityRendererRegistrations(event: EntityRenderersEvent.RegisterRenderers) {
-            val registrations = synchronized(ENTITY_RENDERER_REGISTRATIONS) {
-                ENTITY_RENDERER_REGISTRATIONS.toList().also { ENTITY_RENDERER_REGISTRATIONS.clear() }
+            pendingEntityRenderers.forEach { (type, provider) ->
+                @Suppress("UNCHECKED_CAST")
+                event.registerEntityRenderer(type as EntityType<Entity>, provider as EntityRendererProvider<Entity>)
             }
-
-            registrations.forEach { it.invoke(event) }
+            pendingEntityRenderers.clear()
         }
     }
 }
